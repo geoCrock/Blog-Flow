@@ -1,0 +1,13 @@
+{% for post in posts %}
+  <div>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    <p>Author: {{ post.author }}</p>
+    <p>Likes: {{ post.likes }}</p>
+    <p>Date: {{ post.pub_date }}</p>
+    <a href="{% url 'edit_post' post.id %}">Edit</a>
+    <a href="{% url 'delete_post' post.id %}">Delete</a>
+    <a href="{% url 'increase_likes' post.id %}">Increase Likes</a>
+    <a href="{% url 'decrease_likes' post.id %}">Decrease Likes</a>
+  </div>
+{% endfor %}
