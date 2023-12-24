@@ -8,4 +8,6 @@ urlpatterns = [
     path('delete/<int:post_id>/', delete_post, name='delete_post'),
     path('like/increase/<int:post_id>/', increase_likes, name='increase_likes'),
     path('like/decrease/<int:post_id>/', decrease_likes, name='decrease_likes'),
+    path('create/', create_post, name='create_post'),
+
 ]

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
 from django.http import JsonResponse
+from .forms import PostForm
 
 
 def post_list(request):
@@ -10,12 +11,13 @@ def post_list(request):
 
 def create_post(request):
     if request.method == 'POST':
-        author = request.POST['author']
-        title = request.POST['title']
-        content = request.POST['content']
-        post = Post.objects.create(author=author, title=title, content=content)
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
+    else:
+        form = PostForm()
+    return render(request, 'create_post.html', {'form': form})
 
 
 def edit_post(request, post_id):
