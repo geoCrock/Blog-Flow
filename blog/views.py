@@ -23,12 +23,13 @@ def create_post(request):
 def edit_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
-        post.author = request.POST['author']
-        post.title = request.POST['title']
-        post.content = request.POST['content']
-        post.save()
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False})
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'edit_post.html', {'form': form, 'post': post})
 
 
 def delete_post(request, post_id):

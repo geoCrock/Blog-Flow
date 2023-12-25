@@ -1,0 +1,8 @@
+
+  <h2>Edit Post</h2>
+  <form method="post" action="{% url 'edit_post' post.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+  </form>
+  <a href="{% url 'post_list' %}">Back to Post List</a>
