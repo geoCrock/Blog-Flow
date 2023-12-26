@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 
   <h2>Edit Post</h2>
   <form method="post" action="{% url 'edit_post' post.id %}">
@@ -6,3 +9,4 @@
     <button type="submit">Save Changes</button>
   </form>
   <a href="{% url 'post_list' %}">Back to Post List</a>
+{%endblock%}
