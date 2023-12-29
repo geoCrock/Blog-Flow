@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from .models import Post, Like
 from django.http import JsonResponse
 from .forms import PostForm, RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -42,11 +42,22 @@ def delete_post(request, post_id):
     return JsonResponse({'success': True})
 
 
-def increase_likes(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    post.likes += 1
-    post.save()
-    return JsonResponse({'success': True})
+def like_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+
+    # Проверка, существует ли уже лайк пользователя для этого поста
+    existing_like = Like.objects.filter(post=post, user=user).first()
+
+    if existing_like:
+        # Если лайк существует, удаляем его
+        existing_like.delete()
+    else:
+        # Если лайк не существует, создаем новый
+        Like.objects.create(post=post, user=user)
+
+    # После выполнения действия перенаправляем на текущую страницу
+    return redirect('post_list', post_id=post.id)
 
 
 def decrease_likes(request, post_id):
