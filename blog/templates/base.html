@@ -32,6 +32,17 @@
                     <a class="nav-link text-black font-weight-bold" href="{% url 'create_post' %}">Создать пост</a>
                 </li>
 
+                {% if user.is_authenticated %}
+
+                <li class="nav-item text-black">
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'my_logout_view' %}">Выйти</a>
+                </li>
+                {% else %}
+                <li class="nav-item text-black">
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'register' %}">Войти</a>
+                </li>
+                {% endif %}
+
             </ul>
         </div>
     </div>

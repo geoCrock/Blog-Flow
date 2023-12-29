@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Like
-from django.http import JsonResponse
 from .forms import PostForm, RegistrationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def post_list(request):
@@ -11,7 +10,9 @@ def post_list(request):
     return render(request, 'post_list.html', {'posts': posts})
 
 
+@login_required(login_url='/register/')
 def create_post(request):
+
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
@@ -27,9 +28,8 @@ def create_post(request):
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
-    # Проверка, что текущий пользователь является автором поста
     if request.user.username != post.author:
-        return redirect('post_list')  # Или другая логика, например, отображение сообщения об ошибке
+        return redirect('post_list')
 
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
@@ -45,9 +45,8 @@ def edit_post(request, post_id):
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
 
-    # Проверка, что текущий пользователь является автором поста
     if request.user.username != post.author:
-        return redirect('post_list')  # Или другая логика, например, отображение сообщения об ошибке
+        return redirect('post_list')
 
     post.delete()
     return redirect('post_list')
@@ -78,3 +77,8 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'register.html', {'form': form})
+
+
+def my_logout_view(request):
+    logout(request)
+    return redirect('post_list')
