@@ -22,9 +22,9 @@
                 <p>Likes: {{ post.likes }}</p>
 
 
-                <a href="{% url 'increase_likes' post.id %}">Like</a>
+                <a href="{% url 'increase_likes' post.id %}">Нравится</a>
 
-                <a href="{% url 'decrease_likes' post.id %}">Dislike</a>
+                <a href="{% url 'decrease_likes' post.id %}">Не нравится</a>
 
             </div>
 
@@ -33,7 +33,6 @@
     </div>
 
 </div>
-
 {% endfor %}
 
 {%endblock%}
