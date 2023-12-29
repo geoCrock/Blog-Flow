@@ -25,7 +25,12 @@ def create_post(request):
 
 
 def edit_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, id=post_id)
+
+    # Проверка, что текущий пользователь является автором поста
+    if request.user.username != post.author:
+        return redirect('post_list')  # Или другая логика, например, отображение сообщения об ошибке
+
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -33,13 +38,19 @@ def edit_post(request, post_id):
             return redirect('post_list')
     else:
         form = PostForm(instance=post)
+
     return render(request, 'edit_post.html', {'form': form, 'post': post})
 
 
 def delete_post(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, id=post_id)
+
+    # Проверка, что текущий пользователь является автором поста
+    if request.user.username != post.author:
+        return redirect('post_list')  # Или другая логика, например, отображение сообщения об ошибке
+
     post.delete()
-    return JsonResponse({'success': True})
+    return redirect('post_list')
 
 
 def like_post(request, post_id):
