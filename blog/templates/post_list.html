@@ -29,9 +29,9 @@
                     {% csrf_token %}
                     <button type="submit">
                         {% if user in post.like_set.all %}
-                            Unlike
+                            Нравится
                         {% else %}
-                            Like
+                            Нравится
                         {% endif %}
                     </button>
                 </form>
