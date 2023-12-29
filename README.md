@@ -67,7 +67,7 @@ BlogFlow - это удобный и интуитивно понятный веб
      git clone https://github.com/geoCrock/Blog-Flow.git
      ```
 
-2.Создайте и запустите контейнеры Docker:
+2. Создайте и запустите контейнеры Docker:
 
      ```bash
      docker-compose up --build
