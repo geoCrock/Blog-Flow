@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -7,15 +7,16 @@
         <div class="col-md-8 card mb-4  mt-3 left  top">
             <div class="card-body">
 
-                <h2>Изменить пост</h2>
-                <form method="post" action="{% url 'edit_post' post.id %}">
+                <h2>Вход</h2>
+                <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit">Изменить</button>
+                    <button type="submit">Войти</button>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
 
-{%endblock%}
+{% endblock %}
