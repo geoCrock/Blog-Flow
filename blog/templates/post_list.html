@@ -9,8 +9,8 @@
         <div class="col-md-8 card mb-4  mt-3 left  top">
             <div class="card-body">
                 {% if user.is_authenticated and user.username == post.author %}
-                    <a href="{% url 'edit_post' post.id %}">Редактировать</a>
-                    <a href="{% url 'delete_post' post.id %}">Удалить</a>
+                    <a href="{% url 'edit_post' post.id %}">Edit</a>
+                    <a href="{% url 'delete_post' post.id %}">Delete</a>
                 {% endif %}
 
                 <p>{{ post.pub_date }}</p>
@@ -19,9 +19,9 @@
 
                 <p>{{ post.content }}</p>
 
-                <p>Автор: {{ post.author }}</p>
+                <p>Author: {{ post.author }}</p>
 
-                <p>Лайков: {{ post.like_set.count }}</p>
+                <p>Likes: {{ post.like_set.count }}</p>
 
 
             {% if user.is_authenticated %}
@@ -29,9 +29,9 @@
                     {% csrf_token %}
                     <button type="submit">
                         {% if user in post.like_set.all %}
-                            Нравится
+                            Like
                         {% else %}
-                            Нравится
+                            Like
                         {% endif %}
                     </button>
                 </form>
