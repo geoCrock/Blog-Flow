@@ -1,10 +1,10 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 
 <head>
-    <title>Джанго Блог</title>
+    <title>Blog Flow</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
@@ -18,7 +18,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="mainNav">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'post_list' %}"> Джанго Блог</a>
+        <a class="navbar-brand" href="{% url 'post_list' %}"> Blog Flow</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -29,20 +29,20 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'create_post' %}">Создать пост</a>
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'create_post' %}">Create a post</a>
                 </li>
 
                 {% if user.is_authenticated %}
 
                 <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'my_logout_view' %}">Выйти</a>
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'my_logout_view' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Войти</a>
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item text-black">
-                    <a class="nav-link text-black font-weight-bold" href="{% url 'register' %}">Зарегестрироваться</a>
+                    <a class="nav-link text-black font-weight-bold" href="{% url 'register' %}">Register</a>
                 </li>
 
                 {% endif %}
